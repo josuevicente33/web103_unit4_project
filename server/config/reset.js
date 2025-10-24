@@ -63,6 +63,7 @@ async function createCustomCarsTable() {
         DROP TABLE IF EXISTS custom_cars CASCADE;
         CREATE TABLE custom_cars (
             id SERIAL PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
             car_id INTEGER REFERENCES cars(id),
             color_id INTEGER REFERENCES colors(id),
             wheels_id INTEGER REFERENCES wheels(id),

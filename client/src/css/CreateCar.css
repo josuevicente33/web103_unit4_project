@@ -1,0 +1,59 @@
+/* Container: horizontal row with wrapping */
+.car-preview {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* Each preview card */
+.car-preview > .car,
+.car-preview > .color,
+.car-preview > .wheels {
+  --img-h: 300px;
+  flex: 0 1 260px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: #000000;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+/* Titles */
+.car-preview h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Images: fill card width, fixed height, cover, rounded */
+.car-preview img {
+  width: 100%;
+  height: var(--img-h);
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background: #000000;
+}
+
+/* Fine-tune heights per type */
+.car-preview > .car   { --img-h: 180px; }
+.car-preview > .wheels{ --img-h: 200px; }
+.car-preview > .color { --img-h: 180px;  }
+
+/* If you want color swatches to show full image without cropping, switch to contain */
+.car-preview > .color img {
+  object-fit: contain;
+  background: white;
+}
+
+/* Responsive tweak: on narrow screens, make each card full width */
+@media (max-width: 640px) {
+  .car-preview > .car,
+  .car-preview > .color,
+  .car-preview > .wheels {
+    flex-basis: 100%;
+  }
+}

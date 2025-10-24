@@ -32,3 +32,5 @@ export const deleteCustomCar = async (id) => {
     });
     return response.json();
 }
+
+export default { getAllCustomCars, getCustomCarById, createCustomCar, updateCustomCar, deleteCustomCar };

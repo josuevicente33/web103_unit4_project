@@ -7,3 +7,5 @@ export const getColorById = async (id) => {
     const response = await fetch(`/api/colors/${id}`);
     return response.json();
 }
+
+export default { getAllColors, getColorById };
