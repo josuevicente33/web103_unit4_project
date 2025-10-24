@@ -54,7 +54,7 @@ const CreateCar = () => {
             color_id: selectedColor.id,
             wheels_id: selectedWheels.id,
             total_price: totalPrice,
-            image_url: selectedModel.image_url
+            image_url: carModels.find(car => car.id === parseInt(selectedModel)).image_url
         }).then((data) => {
             console.log('Custom car created:', data);
         }).catch((error) => {

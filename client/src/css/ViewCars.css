@@ -1,0 +1,72 @@
+/* Grid: responsive columns with nice gaps */
+.custom-cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-block: 1rem 2rem;
+}
+
+/* Card */
+.custom-car-card {
+  background: var(--pico-background-color, #fff);
+  border: 1px solid hsl(0 0% 0% / 0.08);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 1px 2px hsl(0 0% 0% / 0.06);
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+/* Hover/focus states (feels like a Pico component) */
+.custom-car-card:hover,
+.custom-car-card:focus-within {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px hsl(0 0% 0% / 0.12);
+  border-color: hsl(0 0% 0% / 0.12);
+}
+
+/* Image: fixed aspect, covers, never stretches */
+.custom-car-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;      /* keeps a consistent tile shape */
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  background: #f1f3f5;       /* neutral placeholder while loading */
+  margin-bottom: 0.75rem;
+}
+
+/* Text spacing */
+.custom-car-card h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.custom-car-card p {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Dark mode (works even if you aren't toggling Pico’s themes) */
+@media (prefers-color-scheme: dark) {
+  .custom-car-card {
+    background: #111214;
+    border-color: hsl(0 0% 100% / 0.08);
+    box-shadow: 0 1px 2px hsl(0 0% 0% / 0.7);
+  }
+  .custom-car-card:hover,
+  .custom-car-card:focus-within {
+    box-shadow: 0 6px 18px hsl(0 0% 0% / 0.6);
+    border-color: hsl(0 0% 100% / 0.12);
+  }
+  .custom-car-image {
+    background: #1b1d21;
+  }
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .custom-car-card {
+    transition: none;
+  }
+}
