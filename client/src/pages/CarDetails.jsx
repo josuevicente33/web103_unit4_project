@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../App.css'
 import customCarAPI from '../services/CustomCarsAPI.jsx'
 import colorsAPI from '../services/ColorsAPI.jsx'
@@ -11,6 +11,7 @@ const CarDetails = () => {
     const [selectedColor, setSelectedColor] = useState([]);
     const [selectedWheels, setSelectedWheels] = useState([]);
     const [selectedCarModel, setSelectedCarModel] = useState([]);
+    const navigate = useNavigate();
 
     const { id } = useParams()
 
@@ -28,6 +29,7 @@ const CarDetails = () => {
     const handleDelete = () => {
         customCarAPI.deleteCustomCar(id).then(() => {
             console.log('Custom car deleted:', id);
+            navigate('/customcars');
         });
     };
 

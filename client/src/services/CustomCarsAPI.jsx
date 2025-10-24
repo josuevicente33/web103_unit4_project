@@ -14,7 +14,22 @@ export const createCustomCar = async (customCarData) => {
         },
         body: JSON.stringify(customCarData),
     });
-    return response.json();
+
+    let data;
+    try {
+        data = await response.json();
+    } catch (error) {
+        data = null;
+    }
+
+    if (!response.ok && response.status == 400) {
+        const message = data?.error || 'Failed to create custom car';
+        const err = new Error(message);
+        err.response = response;
+        throw err;
+    }
+
+    return data;
 }
 export const updateCustomCar = async (id, customCarData) => {
     const response = await fetch(`/api/customCar/${id}`, {

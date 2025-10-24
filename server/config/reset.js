@@ -77,6 +77,22 @@ async function createCustomCarsTable() {
     }
 }
 
+async function createCarWheelCompatibilityTable() {
+    try {
+        await pool.query(`
+        DROP TABLE IF EXISTS car_wheel_compatibility CASCADE;
+        CREATE TABLE car_wheel_compatibility (
+            id SERIAL PRIMARY KEY,
+            car_id INTEGER REFERENCES cars(id),
+            wheel_id INTEGER REFERENCES wheels(id)
+        );
+        `);
+        console.log("Car-Wheel Compatibility table created successfully.");
+    } catch (error) {
+        console.error("Error creating Car-Wheel Compatibility table:", error);
+    }
+}
+
 async function insertInitialData() {
     try {
         for (const wheel of data.wheels) {
@@ -97,6 +113,22 @@ async function insertInitialData() {
                 [car.model, car.description, car.base_price, car.image_url]
             );
         }
+        for (const compatibility of data.carWheelCompatibility) {
+            const carResult = await pool.query(
+                'SELECT id FROM cars WHERE model = $1',
+                [compatibility.car_model]
+            );
+            const car_id = carResult.rows[0].id;
+            const wheelResult = await pool.query(
+                'SELECT id FROM wheels WHERE name = $1',
+                [compatibility.wheel_name]
+            );
+            const wheel_id = wheelResult.rows[0].id;
+            await pool.query(
+                'INSERT INTO car_wheel_compatibility (car_id, wheel_id) VALUES ($1, $2)',
+                [car_id, wheel_id]
+            );
+        }   
         console.log("Initial data inserted successfully.");
     } catch (error) {
         console.error("Error inserting initial data:", error);
@@ -108,6 +140,7 @@ async function resetDatabase() {
     await createColorsTable();
     await createCarsTable();
     await createCustomCarsTable();
+    await createCarWheelCompatibilityTable();
     await insertInitialData();
     pool.end();
 }

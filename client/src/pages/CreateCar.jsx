@@ -5,6 +5,7 @@ import customCarAPI from '../services/CustomCarsAPI.jsx'
 import colorsAPI from '../services/ColorsAPI.jsx'
 import wheelsAPI from '../services/WheelsAPI.jsx'
 import carsAPI from '../services/CarsAPI.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const CreateCar = () => {
     const [carModels, setCarModels] = useState([]);
@@ -15,6 +16,8 @@ const CreateCar = () => {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedWheels, setSelectedWheels] = useState('');
     const [customCarName, setCustomCarName] = useState('');
+
+    const navigate = useNavigate();
 
     // log everything selected
     useEffect(() => {
@@ -57,8 +60,9 @@ const CreateCar = () => {
             image_url: carModels.find(car => car.id === parseInt(selectedModel)).image_url
         }).then((data) => {
             console.log('Custom car created:', data);
+            navigate(`/customcars/${data.id}`);        
         }).catch((error) => {
-            console.error('Error creating custom car:', error);
+            alert(`Error: ${error.message}`);
         });
     }
 

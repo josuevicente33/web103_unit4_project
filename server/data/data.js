@@ -174,6 +174,18 @@ const data = {
       base_price: 27950.00,
       image_url: "https://cdn.motor1.com/images/mgl/vxJrNK/s1/e-transit-courier---studio.jpg"
     }
+  ],
+
+  carWheelCompatibility: [
+    { car_model: "Aurora LX", wheel_name: "Apex V1 18\"" },
+    { car_model: "Aurora Sport", wheel_name: "Apex V1 19\"" },
+    { car_model: "Falcon S", wheel_name: "Helix M 16\"" },
+    { car_model: "Falcon RS", wheel_name: "Orbit S 18\"" },
+    { car_model: "Atlas Touring", wheel_name: "Terra GX 18\"" },
+    { car_model: "Atlas Trail", wheel_name: "Terra GX 17\"" },
+    { car_model: "Vantage E", wheel_name: "Nova RZ 20\"" },
+    { car_model: "Vantage E Performance", wheel_name: "Orbit S 19\"" },
   ]
 };
+
 export default data;

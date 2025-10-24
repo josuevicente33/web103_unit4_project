@@ -25,6 +25,17 @@ const getCustomCarById = async (req, res) => {
 
 const createCustomCar = async (req, res) => {
     const { name, car_id, color_id, wheels_id, total_price, image_url } = req.body;
+
+    // verify that the car_id and the wheel_id are compatible
+    const compatibilityResult = await pool.query(
+        'SELECT * FROM car_wheel_compatibility WHERE car_id = $1 AND wheel_id = $2',
+        [car_id, wheels_id]
+    );
+
+    if (compatibilityResult.rows.length === 0) {
+        return res.status(400).json({ error: 'Selected wheels are not compatible with the selected car model' });
+    }
+
     try {
         const result = await pool.query(
             'INSERT INTO custom_cars (name, car_id, color_id, wheels_id, total_price, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',

@@ -35,6 +35,7 @@ const ViewCars = () => {
                             <p> Delete | Edit </p>
                             <button onClick={() => handleDelete(car.id)}>Delete</button>
                             <Link to={`/edit/${car.id}`}><button>Edit</button></Link>
+                            <Link to={`/customcars/${car.id}`}><button>View</button></Link>
                         </div>
 
                     </div>
