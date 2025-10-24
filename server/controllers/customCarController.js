@@ -39,17 +39,18 @@ const createCustomCar = async (req, res) => {
 
 const updateCustomCar = async (req, res) => {
     const { id } = req.params;
-    const { car_id, color_id, wheels_id, total_price, image_url } = req.body;
+    const { name, car_id, color_id, wheels_id, total_price, image_url } = req.body;
     try {
         const result = await pool.query(
-            'UPDATE custom_cars SET car_id = $1, color_id = $2, wheels_id = $3, total_price = $4, image_url = $5 WHERE id = $6 RETURNING *',
-            [car_id, color_id, wheels_id, total_price, image_url, id]
+            'UPDATE custom_cars SET name = $1, car_id = $2, color_id = $3, wheels_id = $4, total_price = $5, image_url = $6 WHERE id = $7 RETURNING *',
+            [name, car_id, color_id, wheels_id, total_price, image_url, id]
         );
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Custom car not found' });
         }
         res.status(200).json(result.rows[0]);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Failed to update custom car' });
     }
 };

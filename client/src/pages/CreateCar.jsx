@@ -50,9 +50,9 @@ const CreateCar = () => {
 
         customCarAPI.createCustomCar({
             name: customCarName,
-            car_id: selectedModel.id,
-            color_id: selectedColor.id,
-            wheels_id: selectedWheels.id,
+            car_id: carModels.find(car => car.id === parseInt(selectedModel)).id,
+            color_id: colors.find(color => color.id === parseInt(selectedColor)).id,
+            wheels_id: wheelsOptions.find(wheels => wheels.id === parseInt(selectedWheels)).id,
             total_price: totalPrice,
             image_url: carModels.find(car => car.id === parseInt(selectedModel)).image_url
         }).then((data) => {
